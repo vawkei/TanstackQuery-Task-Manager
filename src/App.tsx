@@ -1,39 +1,22 @@
-// import { useState } from 'react'
-// import MockApp from './MockApp'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <MockApp />
-//     </>
-//   )
-// }
-
-// export default App
-
-
-
-
-
-
-
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import HomePage from './pages/HomePage';
-
-const router = createBrowserRouter([
-  {path: "/", element:<HomePage />}
-])
-
+import { useState } from 'react'
+import MockApp from './MockApp'
 
 function App() {
+  const [count, setCount] = useState(0)
 
-  return(
-    <RouterProvider router={router} />
+  return (
+    <>
+      <MockApp />
+    </>
   )
 }
 
 export default App
+
+
+
+
+
+
+
+
