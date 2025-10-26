@@ -1,0 +1,81 @@
+.auth-form-container {
+  width: 100%;
+  // max-width: 35rem;
+  max-width: 25rem;
+  //   min-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  form {
+    width: 100%;
+
+    .cardClass {
+      padding: 1rem;
+
+      .form-intro {
+        margin-top: 0.5rem;
+        padding: 0.25rem;
+      }
+
+      .control {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+
+        label {
+          font-weight: bold;
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        input {
+          width: 100%;
+          padding: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 1rem;
+        }
+      }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .form-outro {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        cursor: pointer;
+      }
+      .form-outro:hover {
+        color: green;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .auth-form-container {
+    max-width: 100%;
+
+    .cardClass {
+      width: 100%;
+
+      .form-outro {
+        padding-top: 1rem;
+      }
+    }
+  }
+}

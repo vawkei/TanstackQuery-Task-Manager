@@ -1,0 +1,80 @@
+.task-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    // max-width: 600px;
+    width: 95%;
+    // max-width: 35rem;
+    max-width: 25rem;
+    margin:  auto;
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+  
+    form {
+      width: 100%;
+    }
+  
+    .cardClass {
+      padding: 2rem;
+    }
+  
+    .control {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+  
+      label {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+  
+      input[type="text"],
+      textarea,
+      input[type="date"] {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        border: 1px solid #cccc;
+        border-radius: 6px;
+        transition: all 0.3s;
+      }
+  
+      input[type="checkbox"] {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+
+      .checkbox{
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+  
+    .action {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+
+@media screen and (max-width:640px) {
+    .task-form-container{
+      max-width: 100%;
+
+      .cardClass{
+        width: 100%;
+      }
+    }
+}
