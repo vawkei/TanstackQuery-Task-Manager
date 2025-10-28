@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import classes from "./UserForm.module.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useCreateUser } from "../../queryOptions/CreateUserQueryOptions";
+import { useCreateUser } from "../../../queryOptions/CreateUserQueryOptions";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { createUser } from "../../apis/users-api";
+import { createUser } from "../../../apis/users-api";
 
 const UserForm = () => {
   const [enteredName, setEnteredName] = useState<string>("");

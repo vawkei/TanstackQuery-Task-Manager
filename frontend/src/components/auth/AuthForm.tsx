@@ -6,6 +6,9 @@ import Button from "../ui/button/Button";
 // import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 // import { AddDispatch, RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
+import { useRegister } from "../../features/auth/useRegister";
+import { useLogin } from "../../features/auth/useLogin";
+import type { User } from "../../interface/interface";
 
 const AuthForm = () => {
   const [enteredName, setEnteredName] = useState<string>("");
@@ -18,6 +21,10 @@ const AuthForm = () => {
   const switchAuthModeHandler = () => {
     setHaveAccount((currentState) => !currentState);
   };
+
+
+  const {mutateAsync:registerUser,isPending} = useRegister();
+  const {mutateAsync:loginUser} = useLogin();
 
   // const dispatch = useDispatch<AddDispatch>();
 
@@ -33,7 +40,7 @@ const AuthForm = () => {
   // console.log("isLoading:",isLoading);
   // console.log("isLoggedIn:", isLoggedIn);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -43,7 +50,7 @@ const AuthForm = () => {
     }
 
     try {
-      const userData = {
+      const userData:User = {
         username: enteredName,
         email: enteredEmail,
         password: enteredPassword,
@@ -51,11 +58,13 @@ const AuthForm = () => {
 
       if (haveAccount) {
         setIsSending(true);
-        navigate("/task-form")
+        await loginUser(userData)
+        // navigate("/task-form")
         // await dispatch(login(userData));
         console.log(userData);
       } else {
         setIsSending(true);
+        await registerUser(userData)
         // await dispatch(register(userData));
         console.log(userData);
       }

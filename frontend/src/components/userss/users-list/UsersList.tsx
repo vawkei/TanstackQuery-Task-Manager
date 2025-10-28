@@ -1,6 +1,6 @@
 import classes from "./UsersList.module.scss";
-import Card from "../ui/card/Card";
-import getUsersQueryOptions from "../../queryOptions/GetUsersQueryOptions";
+import Card from "../../ui/card/Card";
+import getUsersQueryOptions from "../../../queryOptions/GetUsersQueryOptions";
 
 
 const UsersList = () => {

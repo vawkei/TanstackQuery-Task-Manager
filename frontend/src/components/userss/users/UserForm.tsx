@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./UserForm.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useCreateUser } from "../../queryOptions/CreateUserQueryOptions";
+import { useCreateUser } from "../../../queryOptions/CreateUserQueryOptions";
 // import { useQueryClient } from "@tanstack/react-query";
 // import getUsersQueryOptions from "../../queryOptions/GetUsersQueryOptions";
 // import { createUser } from "../../apis/users-api";
