@@ -1,8 +1,12 @@
-import { ProtectedLink } from "../auth/protected/Protected";
+import { ShowWhenLoggedIn, ShowWhenLoggedOut } from "../auth/protected/Protected";
 import classes from "./MainNavigation.module.scss";
 import { Link, NavLink } from "react-router-dom";
+import { useLogout } from "../../features/auth/useLogout";
 
 const MainNavigation = () => {
+ 
+  const {mutateAsync:logoutUser} = useLogout()
+ 
   return (
     <header className={classes.header}>
       <h1>
@@ -10,23 +14,26 @@ const MainNavigation = () => {
       </h1>
       <nav>
         <ul>
-          <ProtectedLink requireAuth={false}>
+          <ShowWhenLoggedOut>
             <li>
               <NavLink to={"/auth-form"}>Auth Form</NavLink>
             </li>
-          </ProtectedLink>
+          </ShowWhenLoggedOut>
 
-          <ProtectedLink requireAuth={true}>
+          <ShowWhenLoggedIn >
             <li>
               <NavLink to={"/user-form"}>Task Form</NavLink>
             </li>
-          </ProtectedLink>
+          </ShowWhenLoggedIn>
 
-          <ProtectedLink requireAuth={true}>
+          <ShowWhenLoggedIn >
             <li>
               <NavLink to={"/user/:id"}>Task Detail</NavLink>
             </li>
-          </ProtectedLink>
+          </ShowWhenLoggedIn>
+          <ShowWhenLoggedIn>
+            <li onClick={()=>logoutUser()}>Logout</li>
+          </ShowWhenLoggedIn>
         </ul>
       </nav>
     </header>

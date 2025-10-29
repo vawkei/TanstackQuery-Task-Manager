@@ -16,20 +16,26 @@ export const ProtectedRoute: FC<{ children: ReactNode }> = (props) => {
   }
 };
 
-interface ProtectedLinkProps {
-  children: ReactNode;
-  requireAuth?: boolean; // true = show if logged in, false = show if logged out
-}
 
-export const ProtectedLink = (props: ProtectedLinkProps) => {
+export const ShowWhenLoggedIn: FC<{ children: ReactNode }> = (props) => {
   const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
   const { isLoggedIn } = useTypedSelector((state) => state.auth);
 
-  const shouldRender = props.requireAuth ? isLoggedIn : !isLoggedIn;
-
-  if (shouldRender) {
+  if (isLoggedIn) {
     return props.children;
-  } else {
-    return null;
+  }else{
+    return null
+  }
+};
+export const ShowWhenLoggedOut:FC<{children:ReactNode}> = (props) => {
+  const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+  const { isLoggedIn } = useTypedSelector((state) => state.auth);
+
+  if (!isLoggedIn) {
+    return props.children;
+  }else{
+    return null
   }
 };

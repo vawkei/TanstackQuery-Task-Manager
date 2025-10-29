@@ -6,9 +6,9 @@ export const register = async (userData: any) => {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "Content-Type": "application/json" },
-      credentials:"include"
+      credentials: "include",
     });
-    const data =await response.json();
+    const data = await response.json();
     console.log("data:", data);
     return data;
   } catch (error) {
@@ -25,14 +25,29 @@ export const login = async (userData: any) => {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "Content-Type": "application/json" },
-      credentials:"include"
+      credentials: "include",
     });
-    const data =await response.json();
+    const data = await response.json();
     console.log("data:", data);
     return data;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "something went wrong";
     console.log("register message:", message);
+    throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/logout`);
+    const data = await response.json();
+    console.log("data:", data);
+    return data;
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "something went wrong";
+    console.log("logoutReeor:", message);
+    throw error;
   }
 };

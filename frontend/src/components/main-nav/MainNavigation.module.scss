@@ -19,10 +19,19 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
 
         a{
             text-decoration: none;
             color: white;
+        }
+        li{
+            color: white;
+        }
+        li:hover{
+            cursor: pointer;
         }
     }
 }
