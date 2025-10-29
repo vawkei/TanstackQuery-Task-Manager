@@ -46,6 +46,7 @@ export const register = async (req: Request, res: Response) => {
       registered.isRegistered = true;
       await registered.save();
       console.log("new user registered");
+      return res.status(200).json({msg:"new user registered"})
     }
   } catch (error) {
     const message =
@@ -59,7 +60,7 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body();
+  const { email, password } = req.body;
 
   if (!email || !password) {
     res.status(400).json({ msg: "please provide email & password" });
@@ -80,7 +81,7 @@ export const login = async (req: Request, res: Response) => {
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      console.log("password dont match");
+      console.log("passwords dont match");
       return res.status(400).json({ msg: "invalid credentials" });
     }
 
@@ -96,14 +97,7 @@ export const login = async (req: Request, res: Response) => {
       { expiresIn: JWT_LIFETIME_SECONDS }
     );
 
-    //  const generateToken = (_id:string, username: string=""):string => {
-    //   const tokenDuration = parseInt(process.env.ExpiresIn || "3600", 10);
-
-    //   return `Bearer ${jwt.sign({ _id, username }, process.env.SecretKey!, {
-    //     expiresIn: tokenDuration,
-    //   })}`;
-    // };
-
+  
     if (user && isPasswordValid) {
       const oneDay = 1000 * 60 * 60 * 24;
 
@@ -134,3 +128,19 @@ export const login = async (req: Request, res: Response) => {
   // console.log("This is the login route");
   // res.send("This is the login route");
 };
+
+export const logout =async (req:Request,res:Response)=>{
+  try{
+    res.cookie("token","",{
+      path:"/",
+      httpOnly:true,
+      expires:new Date(0),
+      // secure:true,
+      // sameSite:"none"
+    });
+    res.status(200).json({msg:"user logged out successfully"})
+  }catch(error){
+    const message = error instanceof Error? error.message:"something went wrong";
+    console.log("logoutError:",message);
+  }
+}

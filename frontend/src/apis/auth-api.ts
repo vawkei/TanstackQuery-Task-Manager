@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/auth";
+const BASE_URL = "http://localhost:5000/api/v1/auth";
 
 export const register = async (userData: any) => {
   try {
@@ -6,14 +6,16 @@ export const register = async (userData: any) => {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "Content-Type": "application/json" },
+      credentials:"include"
     });
-    const data = response.json();
+    const data =await response.json();
     console.log("data:", data);
     return data;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "something went wrong";
     console.log("register message:", message);
+    throw error;
   }
 };
 
@@ -23,8 +25,9 @@ export const login = async (userData: any) => {
       method: "POST",
       body: JSON.stringify(userData),
       headers: { "Content-Type": "application/json" },
+      credentials:"include"
     });
-    const data = response.json();
+    const data =await response.json();
     console.log("data:", data);
     return data;
   } catch (error) {

@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import AuthPage from "./pages/AuthPage";
 import TaskFormPage from "./pages/TaskFormPage";
 import TaskListPage from "./pages/TaskListPage";
+import {ProtectedRoute} from "./components/auth/protected/Protected";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,8 +18,23 @@ function App() {
       children: [
         { path: "/", element: <HomePage /> },
         { path: "/auth-form", element: <AuthPage /> },
-        {path:"/task-form",element:<TaskFormPage />},
-        {path:"/task-list",element:<TaskListPage />}
+        {
+          path: "/task-form",
+          element: (
+            <ProtectedRoute>
+              <TaskFormPage />
+            </ProtectedRoute>
+          ),
+        },
+
+        {
+          path: "/task-list",
+          element: (
+            <ProtectedRoute>
+              <TaskListPage />
+            </ProtectedRoute>
+          ),
+        },
         // { path: "/user-form", element: <UserForm /> },
       ],
     },
