@@ -4,16 +4,16 @@ import {
   getTask,
   getTasks,
   updateTask,
-  deleteTask
+  deleteTask,
 } from "../controllers/task-controller/taskController";
+import authenticationMiddleware from "../middlewares/authMiddleware";
 
 const taskRouter = Router();
 
-taskRouter.post("/create-task",createTask);
-taskRouter.get("/get-task",getTask);
-taskRouter.get("/get-tasks",getTasks);
-taskRouter.patch("/update-task",updateTask);
-taskRouter.patch("/delete-task",deleteTask);
+taskRouter.post("/create-task", authenticationMiddleware, createTask);
+taskRouter.get("/get-task", authenticationMiddleware, getTask);
+taskRouter.get("/get-tasks", authenticationMiddleware, getTasks);
+taskRouter.patch("/update-task", authenticationMiddleware, updateTask);
+taskRouter.delete("/delete-task", authenticationMiddleware, deleteTask);
 
 export default taskRouter;
-

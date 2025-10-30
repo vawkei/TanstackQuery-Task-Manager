@@ -3,43 +3,50 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../ui/button/Button";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Card from "../ui/card/Card";
-
+import type { TaskProps } from "../../interface/interface";
 
 const TaskForm = () => {
+  const [enteredTitle, setEnteredTitle] = useState<string>("");
+  const [enteredDescription, setEnteredDescription] = useState<string>("");
+  const [enteredStatus, setEnteredTaskStatus] = useState<boolean>(false);
+  const [enteredDate, setEnteredDate] = useState<Date | null >(null);
 
-    const [enteredTitle,setEnteredTitle] = useState<string>("")
-    const [enteredDescription,setEnteredDescription] = useState<string>("");
-    const [enteredStatus,setEnteredTaskStatus] = useState<boolean>(false)
-    const [enteredDate,setEnteredDate] = useState<Date|null>(null);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const submitTaskHandler = (event: React.FormEvent) => {
+    event.preventDefault();
 
-
-    const submitTaskHandler =(event:React.FormEvent)=>{
-        event.preventDefault();
-
-        if(
-            enteredTitle.trim().length===0 ||enteredDescription.trim().length===0 || enteredDate===null
-        ){
-            return console.log("please fill in your task...")
-        };
-
-        const taskData = {
-            title:enteredTitle,
-            desciption:enteredDescription,
-            status:enteredStatus,
-            dateDue:enteredDate.toISOString()
-        };
-        
-
-        console.log(taskData);
-        console.log(`taskdata: ${taskData}`)
-         navigate("/task-list");
+    if (
+      enteredTitle.trim().length === 0 ||
+      enteredDescription.trim().length === 0 ||
+      enteredDate === null
+    ) {
+      return console.log("please fill in your task...");
     }
 
-    return ( 
-        <div className={classes["task-form-container"]}>
+    const taskData = {
+      title: enteredTitle,
+      desciption: enteredDescription,
+      status: enteredStatus,
+      dateDue:enteredDate.toLocaleDateString()
+
+
+      // dateDue:enteredDate.toLocaleString():dateDue: '10/30/2025, 12:00:00 AM'}
+      // dateDue: enteredDate.toLocaleDateString(),:dateDue: '10/30/2025'}
+      // dateDue:enteredDate:dateDue: Thu Oct 30 2025 00:00:00 GMT+0100 (West Africa Standard Time)}
+      // dateDue:enteredDate.toISOString()dateDue: '2025-10-29T23:00:00.000Z'}
+   
+    };
+
+    // console.log(taskData);
+    console.log("taskdata:", taskData);
+    //  navigate("/task-list");
+  };
+
+  return (
+    <div className={classes["task-form-container"]}>
       <h2>Task Form</h2>
       <form onSubmit={submitTaskHandler}>
         <Card className={classes.cardClass}>
@@ -87,7 +94,7 @@ const TaskForm = () => {
         </Card>
       </form>
     </div>
-     );
-}
- 
+  );
+};
+
 export default TaskForm;

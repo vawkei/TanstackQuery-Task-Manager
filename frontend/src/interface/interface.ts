@@ -10,5 +10,11 @@ export interface AuthState {
   // isLoading: boolean,
   message: string;
   user: null;
-//   token: string;
+  //   token: string;
+}
+export interface TaskProps {
+  title: string;
+  desciption: string;
+  status: boolean;
+  dateDue: null | Date;
 }

@@ -7,6 +7,7 @@ import { notFoundMiddleware } from "./middlewares/notFoundMiddleware";
 import { errorHandlerMiddleware } from "./middlewares/errorHandlerMiddleware";
 import taskRouter from "./routes/task-route";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser"
 
 const authRoute = authRouter;
 const taskRoute = taskRouter;
@@ -30,6 +31,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use(cookieParser());
 
 //routes:
 app.get("/", (_req: Request, res: Response) => {

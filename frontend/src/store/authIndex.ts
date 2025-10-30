@@ -22,6 +22,11 @@ export const authSlice = createSlice({
       state.message = action.payload.msg;
       state.user = action.payload.user;
     },
+    SET_LOGGEDOUT_USER(state, action:any) {
+      console.log("authSliceLoggedout:",action.payload)
+      state.isLoggedIn = false;
+      state.user = null;
+    },
     RESET_AUTH(state) {
       // state.isError = false;
       state.isSuccess = false;
@@ -30,5 +35,9 @@ export const authSlice = createSlice({
   },
 });
 
-export const { SET_REGISTERED_USER, SET_LOGGEDIN_USER, RESET_AUTH } =
-  authSlice.actions;
+export const {
+  SET_REGISTERED_USER,
+  SET_LOGGEDIN_USER,
+  SET_LOGGEDOUT_USER,
+  RESET_AUTH,
+} = authSlice.actions;

@@ -11,6 +11,9 @@ const authenticationMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
+
+
+  console.log("checking......:",req.cookies)
   const token = req.cookies.token;
   if (!token) {
     console.log("You are not authorized to access this route. ");
