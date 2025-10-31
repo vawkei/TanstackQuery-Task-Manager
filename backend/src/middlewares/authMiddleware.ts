@@ -24,8 +24,10 @@ const authenticationMiddleware = (
   }
 
   try {
-    // const verificationToken = jwt.verify(token, JWT_SECRET) as  JwtPayload
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_V!) as JwtPayload ;
+   
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_V!) ;
+
+    console.log("decoded:",decoded)
 
     if (!decoded || typeof decoded === "string") {
       throw new Error("invalid token payload");
@@ -35,6 +37,7 @@ const authenticationMiddleware = (
       userId: decoded.userId,
       userName: decoded.userName,
     };
+    console.log("reqUser:",req.user.userId,req.user.userName)
     next();
   } catch (error) {
     const message =

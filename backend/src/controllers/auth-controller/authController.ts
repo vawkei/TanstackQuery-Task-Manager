@@ -4,6 +4,9 @@ import User from "../../models/User";
 import jwt from "jsonwebtoken";
 
 export const register = async (req: Request, res: Response) => {
+
+  console.log("This is the register route");
+
   const { name, email, password } = req.body;
   console.log(name, email, password);
 
@@ -60,6 +63,9 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+
+ console.log("This is the login route");
+
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -86,15 +92,11 @@ export const login = async (req: Request, res: Response) => {
     }
 
     console.log("about to issue jwt cookie");
-
-    const JWT_LIFETIME_SECONDS = process.env.JWT_LIFETIME
-      ? parseInt(process.env.JWT_LIFETIME, 10)
-      : 24 * 60 * 60;
       
     const token = jwt.sign(
       { userId: user._id, userName: user.name },
       process.env.JWT_SECRET_V!,
-      { expiresIn: JWT_LIFETIME_SECONDS }
+      { expiresIn: "1d" }
     );
 
   
@@ -145,3 +147,10 @@ export const logout =async (req:Request,res:Response)=>{
     console.log("logoutError:",message);
   }
 }
+
+
+
+
+
+
+

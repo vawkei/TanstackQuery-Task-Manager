@@ -17,6 +17,11 @@ const TaskSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    createdBy:{
+        type:mongoose.Types.ObjectId,
+        ref:"User",
+        required:[true,"please provide user"]
+    },
     dateDue:{
         type:String,
         required:[true,"please set a date"]
