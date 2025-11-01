@@ -8,6 +8,7 @@ import AuthPage from "./pages/AuthPage";
 import TaskFormPage from "./pages/TaskFormPage";
 import TaskListPage from "./pages/TaskListPage";
 import {ProtectedRoute} from "./components/auth/protected/Protected";
+import EditTaskPage from "./pages/EditTaskPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +36,14 @@ function App() {
             </ProtectedRoute>
           ),
         },
+        {
+          path:"/task-list/:id",
+          element:(
+            <ProtectedRoute>
+              <EditTaskPage />
+            </ProtectedRoute>
+          )
+        }
         // { path: "/user-form", element: <UserForm /> },
       ],
     },

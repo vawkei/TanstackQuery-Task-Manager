@@ -1,11 +1,11 @@
 import classes from "./TaskForm.module.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Button from "../ui/button/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "../ui/card/Card";
-import type { TaskProps } from "../../interface/interface";
+// import type { TaskProps } from "../../interface/interface";
 
 const TaskForm = () => {
   const [enteredTitle, setEnteredTitle] = useState<string>("");
@@ -13,7 +13,7 @@ const TaskForm = () => {
   const [enteredStatus, setEnteredTaskStatus] = useState<boolean>(false);
   const [enteredDate, setEnteredDate] = useState<Date | null >(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const submitTaskHandler = (event: React.FormEvent) => {
     event.preventDefault();
