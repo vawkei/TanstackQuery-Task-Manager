@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./AuthForm.module.scss";
 import Card from "../ui/card/Card";
 import Button from "../ui/button/Button";
 // import { register, login, RESET_AUTH } from "../../store/auth/authIndex";
 import { useDispatch } from "react-redux";
 import type { AddDispatch } from "../../store/store";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRegister } from "../../features/auth/useRegister";
 import { useLogin } from "../../features/auth/useLogin";
 import type { User } from "../../interface/interface";
@@ -56,10 +56,28 @@ const AuthForm = () => {
             }
           },
         });
-        
 
-        console.log(userData);
-      } else {
+      //   const response = await fetch(
+      //     "http://localhost:5000/api/v1/auth/login",
+      //     {
+      //       method: "POST",
+      //       body: JSON.stringify(userData),
+      //       headers: { "Content-Type": "application/json" },
+      //       credentials:"include"
+      //     }
+      //   );
+      //   const data = await response.json();
+      //   if (data.msg === "loggedin successfully") {
+      //     dispatch(SET_LOGGEDIN_USER(data));
+      //     navigate("/task-form");
+      //   }
+      //   console.log("fetchedLogin:", data);
+      //   return data;
+
+      //   // console.log(userData);
+       } 
+       
+       else {
         // 📒📒For Register===============================================================
         setIsSending(true);
         await registerUser(userData, {

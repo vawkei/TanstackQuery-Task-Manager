@@ -33,21 +33,23 @@ export const login = async (userData: any) => {
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "something went wrong";
-    console.log("register message:", message);
+    console.log("loginErrorMessage:", message);
     throw error;
   }
 };
 
 export const logout = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/logout`);
+    const response = await fetch(`${BASE_URL}/logout`,{
+      credentials:"include"
+    });
     const data = await response.json();
     console.log("data:", data);
     return data;
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "something went wrong";
-    console.log("logoutReeor:", message);
+    console.log("logoutError:", message);
     throw error;
   }
 };

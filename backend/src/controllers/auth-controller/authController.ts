@@ -4,7 +4,6 @@ import User from "../../models/User";
 import jwt from "jsonwebtoken";
 
 export const register = async (req: Request, res: Response) => {
-
   console.log("This is the register route");
 
   const { name, email, password } = req.body;
@@ -49,7 +48,7 @@ export const register = async (req: Request, res: Response) => {
       registered.isRegistered = true;
       await registered.save();
       console.log("new user registered");
-      return res.status(200).json({msg:"new user registered"})
+      return res.status(200).json({ msg: "new user registered" });
     }
   } catch (error) {
     const message =
@@ -63,8 +62,7 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-
- console.log("This is the login route");
+  console.log("This is the login route");
 
   const { email, password } = req.body;
 
@@ -92,14 +90,13 @@ export const login = async (req: Request, res: Response) => {
     }
 
     console.log("about to issue jwt cookie");
-      
+
     const token = jwt.sign(
       { userId: user._id, userName: user.name },
       process.env.JWT_SECRET_V!,
       { expiresIn: "1d" }
     );
 
-  
     if (user && isPasswordValid) {
       const oneDay = 1000 * 60 * 60 * 24;
 
@@ -107,16 +104,13 @@ export const login = async (req: Request, res: Response) => {
 
       res.cookie("token", token, {
         path: "/",
-
         httpOnly: true,
-
         expires: new Date(Date.now() + oneDay),
-
         // secure:true,
-
         // sameSite:"none"
       });
 
+      console.log("loggedin successfully");
       res
         .status(201)
         .json({ msg: "loggedin successfully", user: { _id, name, email } });
@@ -131,26 +125,29 @@ export const login = async (req: Request, res: Response) => {
   // res.send("This is the login route");
 };
 
-export const logout =async (req:Request,res:Response)=>{
-  console.log("the logout route")
-  try{
-    res.cookie("token","",{
-      path:"/",
-      httpOnly:true,
-      expires:new Date(0),
+export const logout = async (req: Request, res: Response) => {
+  console.log("the logout route");
+  try {
+    // res.cookie("token", " ", {
+    //   path: "/",
+    //   httpOnly: true,
+    //   // secure: false,        // must match login
+    //   // sameSite: "lax",
+    // });
+
+    res.cookie("token", "", {
+      path: "/",
+      httpOnly: true,
+      expires: new Date(0),
       // secure:true,
       // sameSite:"none"
     });
-    res.status(200).json({msg:"user logged out successfully"})
-  }catch(error){
-    const message = error instanceof Error? error.message:"something went wrong";
-    console.log("logoutError:",message);
+
+    console.log("user logged out successfully");
+    res.status(200).json({ msg: "user logged out successfully" });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "something went wrong";
+    console.log("logoutError:", message);
   }
-}
-
-
-
-
-
-
-
+};

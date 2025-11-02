@@ -1,12 +1,30 @@
-import { ShowWhenLoggedIn, ShowWhenLoggedOut } from "../auth/protected/Protected";
+import {
+  ShowWhenLoggedIn,
+  ShowWhenLoggedOut,
+} from "../auth/protected/Protected";
 import classes from "./MainNavigation.module.scss";
 import { Link, NavLink } from "react-router-dom";
 import { useLogout } from "../../features/auth/useLogout";
+// import type { AddDispatch } from "../../store/store";
+// import { useDispatch } from "react-redux";
+// import { SET_LOGGEDOUT_USER } from "../../store/authIndex";
 
 const MainNavigation = () => {
- 
-  const {mutateAsync:logoutUser} = useLogout()
- 
+  const { mutateAsync: logoutUser } = useLogout();
+
+  // const dispatch = useDispatch<AddDispatch>();
+  // const logOut = async () => {
+  //   const response = await fetch("http://localhost:5000/api/v1/auth/logout",{
+  //     credentials:"include"
+  //   });
+  //   const data = await response.json();
+  //   if (data.msg === "user logged out successfully") {
+  //     dispatch(SET_LOGGEDOUT_USER(data));
+  //   }
+  //   console.log("fetchedLogOut:", data);
+  //   return data;
+  // };
+
   return (
     <header className={classes.header}>
       <h1>
@@ -20,19 +38,20 @@ const MainNavigation = () => {
             </li>
           </ShowWhenLoggedOut>
 
-          <ShowWhenLoggedIn >
+          <ShowWhenLoggedIn>
             <li>
-              <NavLink to={"/user-form"}>Task Form</NavLink>
+              <NavLink to={"/task-form"}>Task Form</NavLink>
             </li>
           </ShowWhenLoggedIn>
 
-          <ShowWhenLoggedIn >
+          {/* <ShowWhenLoggedIn >
             <li>
               <NavLink to={"/user/:id"}>Task Detail</NavLink>
             </li>
-          </ShowWhenLoggedIn>
+          </ShowWhenLoggedIn> */}
           <ShowWhenLoggedIn>
-            <li onClick={()=>logoutUser()}>Logout</li>
+             <li onClick={()=>logoutUser()}>Logout</li> 
+            {/*<li onClick={() => logOut()}>Logout</li> */}
           </ShowWhenLoggedIn>
         </ul>
       </nav>

@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { AuthState } from "../interface/interface";
 
 const initialAuthState: AuthState = {
-  isLoggedIn: false,
+  // isLoggedIn: false,
+  isLoggedIn:
+    JSON.parse(localStorage.getItem("isLoggedInLs") || "false") || false,
   isSuccess: false,
   message: "",
   user: null,
@@ -21,11 +23,15 @@ export const authSlice = createSlice({
       state.isLoggedIn = true;
       state.message = action.payload.msg;
       state.user = action.payload.user;
+      localStorage.setItem("isLoggedInLs", JSON.stringify(state.isLoggedIn));
+      console.log("loggedIn saved to local storage");
     },
-    SET_LOGGEDOUT_USER(state, action:any) {
-      console.log("authSliceLoggedout:",action.payload)
+    SET_LOGGEDOUT_USER(state, action: any) {
+      console.log("authSliceLoggedout:", action.payload);
       state.isLoggedIn = false;
+      localStorage.setItem("isLoggedInLs", JSON.stringify(state.isLoggedIn));
       state.user = null;
+      console.log("isLoggedIn:", state.isLoggedIn);
     },
     RESET_AUTH(state) {
       // state.isError = false;

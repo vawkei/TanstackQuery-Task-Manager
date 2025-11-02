@@ -1,7 +1,9 @@
 const BASE_URL = "http://localhost:5000/api/v1/tasks";
 
 export const getTasks = async () => {
-  const response = await fetch(`${BASE_URL}/get-tasks`);
+  const response = await fetch(`${BASE_URL}/get-tasks`,{
+    credentials:"include"
+  });
 
   const data =await response.json();
   console.log("data:", data);

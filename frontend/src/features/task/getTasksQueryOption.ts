@@ -1,14 +1,14 @@
-import {  useQuery } from "@tanstack/react-query";
+import { queryOptions  } from "@tanstack/react-query";
 import { getTasks } from "../../apis/tasks-api";
 
-const useGetTasksQuery = ()=>{
+const getTasksQueryOption = ()=>{
 
-    return useQuery({
+    return queryOptions({
         queryKey:["tasks"],
         queryFn:()=>getTasks(),
-        // staleTime:60000
+        staleTime:60000
         //  queryClient.invalidateQueries({ queryKey: ["users"] });
     })
 };
 
-export default useGetTasksQuery;
+export default getTasksQueryOption;
