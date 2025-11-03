@@ -44,11 +44,11 @@ const MainNavigation = () => {
             </li>
           </ShowWhenLoggedIn>
 
-          {/* <ShowWhenLoggedIn >
+          <ShowWhenLoggedIn >
             <li>
-              <NavLink to={"/user/:id"}>Task Detail</NavLink>
+              <NavLink to={"/task-list"}>Task List</NavLink>
             </li>
-          </ShowWhenLoggedIn> */}
+          </ShowWhenLoggedIn>
           <ShowWhenLoggedIn>
              <li onClick={()=>logoutUser()}>Logout</li> 
             {/*<li onClick={() => logOut()}>Logout</li> */}

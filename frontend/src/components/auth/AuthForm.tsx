@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import classes from "./AuthForm.module.scss";
 import Card from "../ui/card/Card";
 import Button from "../ui/button/Button";
@@ -52,7 +52,7 @@ const AuthForm = () => {
             console.log("responseFromServer:", data);
             if (data?.msg === "loggedin successfully") {
               dispatch(SET_LOGGEDIN_USER(data));
-              navigate("/task-form")
+              navigate("/task-list")
             }
           },
         });

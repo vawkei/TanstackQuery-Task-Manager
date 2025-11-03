@@ -1,20 +1,25 @@
 import { useMutation } from "@tanstack/react-query";
 import { updateTask } from "../../apis/tasks-api";
 import { useNavigate } from "react-router-dom";
+import type { TaskProps } from "../../interface/interface";
 
 const useUpdateTask = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (id: string, task) => updateTask(id, task),
+    // mutationFn: ({id task}) => updateTask(id, task),
+    mutationFn: ({ id, task }: { id: string; task: TaskProps }) =>
+      updateTask(id, task),
     onSuccess: (data) => {
       console.log("responseFromServer:", data);
-      navigate("/");
+      if (data?.msg === "task updated successfully") {
+        navigate("/task-list");
+      }
     },
     onError: (error: any) => {
       const message =
         error instanceof Error ? error.message : "something went wrong";
-        console.log("updateTaskError:",message)
+      console.log("updateTaskError:", message);
     },
   });
 };

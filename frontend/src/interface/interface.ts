@@ -13,8 +13,9 @@ export interface AuthState {
   //   token: string;
 }
 export interface TaskProps {
+  _id?:string,
   title: string;
-  desciption: string;
+  description: string;
   status: boolean;
-  dateDue: null | Date;
+  dateDue: null | string;
 }

@@ -1,0 +1,84 @@
+.cardClass {
+  max-width: 35rem;
+  margin: 2rem auto;
+  padding: 1rem;
+
+  h2 {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input{
+      border-radius: 6px;
+      padding: 0.25rem;
+      width:100%;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .cardClass2 {
+        padding: 1rem;
+
+        .desc{
+          margin-top: 0.5rem;
+        }
+
+        .status-date {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .actions {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 1rem;
+
+          .edit:hover,.delete:hover{
+            cursor: pointer;
+          }
+        }
+        .true {
+          /* color: rgb(15, 236, 15); */
+          color: #0ed915;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:640px) {
+  .search{
+    display: flex;
+    flex-direction: column;
+    width:70%;
+    margin: 0 auto;
+
+    input{
+      border-radius: 6px;
+      padding: 0.25rem;
+      width: 100%;
+    }
+}
+.no-task-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+}

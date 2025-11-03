@@ -1,19 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 import { createTask } from "../../apis/tasks-api";
 import { useNavigate } from "react-router-dom";
+import type { TaskProps } from "../../interface/interface";
 
 export const useCreateTask = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (data) => createTask(data),
+    mutationFn: (taskData:TaskProps) => createTask(taskData),
     onSuccess: (data) => {
       console.log("responseFromServer:", data);
       if (data?.msg === "new task created") {
-        navigate("/");
+        navigate("/task-list");
       }
     },
-
     onError: (error: any) => {
       const message =
         error instanceof Error ? error.message : "something went wrong";

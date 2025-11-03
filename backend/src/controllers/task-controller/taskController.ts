@@ -3,10 +3,19 @@ import Tasks from "../../models/Tasks";
 import { AuthenticatedRequest } from "../../middlewares/authMiddleware";
 
 export const createTask = async (req: AuthenticatedRequest, res: Response) => {
-  
   console.log("This is the createtask route");
-  
+
   const { title, description, status, dateDue } = req.body;
+  console.log(
+    "title:",
+    title,
+    "des:",
+    description,
+    "status:",
+    status,
+    "dateDue:",
+    dateDue
+  );
 
   if (!title || !description || !dateDue) {
     res.status(400).json({ msg: "please fill out the inputs except status" });
@@ -37,9 +46,8 @@ export const createTask = async (req: AuthenticatedRequest, res: Response) => {
 };
 
 export const getTasks = async (req: AuthenticatedRequest, res: Response) => {
-  
   console.log("this is the getTasks route");
-  
+
   const userId = req.user?.userId;
   const userName = req.user?.userName;
   console.log("userId:", userId);
@@ -47,9 +55,9 @@ export const getTasks = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const tasks = await Tasks.find({ createdBy: userId });
 
-    if(tasks.length===0){
-      res.status(200).json({msg:"no task saved"})
-      return
+    if (tasks.length === 0) {
+      res.status(200).json({ msg: "no task saved" });
+      return;
     }
     res
       .status(200)
@@ -63,8 +71,7 @@ export const getTasks = async (req: AuthenticatedRequest, res: Response) => {
 };
 
 export const getTask = async (req: Request, res: Response) => {
-  
-  console.log("this is the getTask route")
+  console.log("this is the getTask route");
 
   const { id } = req.params;
   console.log("params:", id);
@@ -82,9 +89,8 @@ export const getTask = async (req: Request, res: Response) => {
 };
 
 export const updateTask = async (req: Request, res: Response) => {
- 
   console.log("this is the updateTask route");
- 
+
   const taskId = req.params.id;
   console.log("params:", taskId);
 
@@ -124,9 +130,8 @@ export const updateTask = async (req: Request, res: Response) => {
 };
 
 export const deleteTask = async (req: Request, res: Response) => {
-  
   console.log("this is the deleteTask route");
-  
+
   const taskId = req.params.id;
   console.log("taskId:", taskId);
 
@@ -134,7 +139,8 @@ export const deleteTask = async (req: Request, res: Response) => {
     await Tasks.findOneAndDelete({ _id: taskId });
     res
       .status(200)
-      .json({ msg: `task with id ${taskId} deleted successfully.` });
+      // .json({ msg: `task with id ${taskId} deleted successfully.` });
+      .json({ msg: `task deleted successfully.` });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "something went wrong";

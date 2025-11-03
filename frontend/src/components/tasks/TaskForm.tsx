@@ -6,6 +6,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "../ui/card/Card";
 // import type { TaskProps } from "../../interface/interface";
+import { useCreateTask } from "../../features/task/useCreateTask";
+import type { TaskProps } from "../../interface/interface";
+
 
 const TaskForm = () => {
   const [enteredTitle, setEnteredTitle] = useState<string>("");
@@ -13,9 +16,11 @@ const TaskForm = () => {
   const [enteredStatus, setEnteredTaskStatus] = useState<boolean>(false);
   const [enteredDate, setEnteredDate] = useState<Date | null >(null);
 
+  const {mutateAsync:createTask} = useCreateTask();
+
   // const navigate = useNavigate();
 
-  const submitTaskHandler = (event: React.FormEvent) => {
+  const submitTaskHandler =async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (
@@ -26,9 +31,9 @@ const TaskForm = () => {
       return console.log("please fill in your task...");
     }
 
-    const taskData = {
+    const taskData: TaskProps = {
       title: enteredTitle,
-      desciption: enteredDescription,
+      description: enteredDescription,
       status: enteredStatus,
       dateDue:enteredDate.toLocaleDateString()
 
@@ -39,9 +44,8 @@ const TaskForm = () => {
       // dateDue:enteredDate.toISOString()dateDue: '2025-10-29T23:00:00.000Z'}
    
     };
-
-    // console.log(taskData);
     console.log("taskdata:", taskData);
+    await createTask(taskData)
     //  navigate("/task-list");
   };
 
