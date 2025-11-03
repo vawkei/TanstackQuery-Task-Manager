@@ -2,12 +2,10 @@ import classes from "./TaskList.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import getTasksQueryOption from "../../features/task/getTasksQueryOption";
 import Card from "../ui/card/Card";
-import { useState } from "react";
+// import { useState } from "react";
 import type { TaskProps } from "../../interface/interface";
 import { AiFillEdit } from "react-icons/ai";
 import {
-  RiDeleteBack2Fill,
-  RiDeleteBin2Fill,
   RiDeleteBin2Line,
 } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -17,23 +15,23 @@ const TaskList = () => {
   const { data, isLoading, isError, error } = useQuery(getTasksQueryOption());
   console.log("data:", data);
   
-  const {mutateAsync:deleteTask} = useDeleteTask()
+  const {mutateAsync:deleteTaskMutation} = useDeleteTask()
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
 
   
   const navigateToEditPageHandler = (id: string) => {
     navigate(`/task-list/${id}`);
   };
   const deleteButtonHandler =async (id:string)=>{
-      await deleteTask(id)
+      await deleteTaskMutation(id)
   }
   
 
   if (isLoading) {
     return (
-      <div>
+      <div  className={classes.returns}>
         <p>Loading...</p>
       </div>
     );
@@ -41,10 +39,18 @@ const TaskList = () => {
 
   if (isError) {
     return (
-      <div>
+      <div  className={classes.returns}>
         <p>{error.message}</p>
       </div>
     );
+  }
+
+  if(data?.nbhts===0){
+    return(
+      <div className={classes.returns}>
+        <p>{data?.msg}</p>
+      </div>
+    )
   }
 
 

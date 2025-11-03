@@ -56,7 +56,7 @@ export const getTasks = async (req: AuthenticatedRequest, res: Response) => {
     const tasks = await Tasks.find({ createdBy: userId });
 
     if (tasks.length === 0) {
-      res.status(200).json({ msg: "no task saved" });
+      res.status(200).json({ msg: "no task saved",nbhts:tasks.length });
       return;
     }
     res
