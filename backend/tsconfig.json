@@ -7,10 +7,10 @@
     "rootDir": "./src",
     "strict": true,
     "experimentalDecorators": true, //Enables decorators (required for TypeORM).
-    "emitDecoratorMetadata": true,  //Allows TypeScript to generate metadata for decorators.
+    "emitDecoratorMetadata": true, //Allows TypeScript to generate metadata for decorators.
 
-    "strictPropertyInitialization": false,//Prevents TypeScript from throwing errors for uninitialized properties.
-    
+    "strictPropertyInitialization": false, //Prevents TypeScript from throwing errors for uninitialized properties.
+    "typeRoots": ["./types", "./node_modules/@types"],
     "esModuleInterop": true,
     "skipLibCheck": true
   }

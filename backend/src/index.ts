@@ -7,23 +7,35 @@ import { notFoundMiddleware } from "./middlewares/notFoundMiddleware";
 import { errorHandlerMiddleware } from "./middlewares/errorHandlerMiddleware";
 import taskRouter from "./routes/task-route";
 import mongoose from "mongoose";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import connectRedis from "connect-redis";
+import { redisClient } from "./redis/redisClient";
+
+
 
 const authRoute = authRouter;
 const taskRoute = taskRouter;
 
 const app = express();
+const RedisStore = connectRedis(session);
+
+app.use(session({
+  store:new RedisStore({client:redisClient}), //stores session in Redis
+  secret:process.env.SESSION_SECRET!,
+  resave:false,
+  saveUninitialized:false,
+  cookie:{
+    httpOnly:true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge:1000*60*60*24 //one day
+  }
+}))
 
 // to parse the json body:
 app.use(express.json());
 
 const corsOptions = {
-  // origin: [
-  //   "http://localhost:3000",
-  //   "http://192.168.43.52:8081",
-  // ],
-  // Allow requests from local network👆👆
-
   origin: "http://localhost:3000", // 👈 TEMPORARY for testing, not secure for production
   credentials: true,
   methods: ["GET", "POST", "PATCH", "DELETE"],
