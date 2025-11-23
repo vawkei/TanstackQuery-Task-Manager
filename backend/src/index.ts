@@ -59,29 +59,8 @@ app.use("/api/v1/tasks", taskRoute);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = Number(process.env.PORT) || 5000;
-// const HOST = "0.0.0.0";
+console.log(`Worker ${process.pid} connected to Redis`);
 
-//👇👇============= Connecting locally without a database============👇👇
-// const start = async () => {
-//   app.listen(port, "localhost", () => {
-//     console.log(`server is listening on port: ${port}`);
-//   });
-// };
-// start();
-//👆👆============= Connecting locally without a database============👆👆
 
-//👇👇============= Connecting locally to mongodb compass============👇👇
-  const start = async () => {
-  try {
-    await mongoose.connect("mongodb://localhost:27017/TASK-MANAGER");
-    app.listen(port,"localhost", () => {
-      console.log("Connected to local MongoDb successfully");
-      console.log(`server listening on port ${port}`);
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-start();
-//👆👆============= Connecting locally to mongodb compass============👆👆
+export default app; //👈👈👈👈🛑🛑🛑 Export the app here 🛑🛑🛑👈👈👈👈
+
