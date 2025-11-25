@@ -25,10 +25,13 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization", "my-custom-header"],
 };
 
+// number 1
 app.use(cors(corsOptions));
 
+// number 2
 app.use(cookieParser());
 
+// number 3
 app.use(
   session({
     store: new RedisStore({ client: redisClient }), //stores session in Redis
@@ -43,7 +46,7 @@ app.use(
   })
 );
 
-// to parse the json body:
+//  number 4 to parse the json body:
 app.use(express.json());
 
 //routes:
