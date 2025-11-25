@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5000/api/v1/auth";
+// const BASE_URL = "http://localhost:5000/api/v1/auth";
+const BASE_URL = "http://localhost/api/v1/auth";
 
 export const register = async (userData: any) => {
   try {
