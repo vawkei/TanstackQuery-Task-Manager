@@ -5,23 +5,23 @@ This project is structured into multiple branches, each showcasing a new backend
 
 # Features
 
-Full CRUD (Create, Read, Update, Delete) operations
+- Full CRUD (Create, Read, Update, Delete) operations
 
-Authentication (JWT cookies or Redis sessions depending on branch)
+- Authentication (JWT cookies or Redis sessions depending on branch)
 
-TanStack Query for API communication
+- TanStack Query for API communication
 
-MERN architecture (MongoDB, Express.js, React, Node.js)
+- MERN architecture (MongoDB, Express.js, React, Node.js)
 
-Horizontal scaling with Node.js Cluster
+- Horizontal scaling with Node.js Cluster
 
-Load balancing with Nginx
+- Load balancing with Nginx
 
-Dockerized frontend, backend, and reverse-proxy
+- Dockerized frontend, backend, and reverse-proxy
 
-Redis-powered session management
+- Redis-powered session management
 
-In-progress CI/CD pipeline for deployment to Render
+- In-progress CI/CD pipeline for deployment to Render
 
 # Project Structure
 
@@ -31,13 +31,13 @@ Each branch introduces a new architectural improvement.
 1. **master branch — Basic CRUD + JWT Cookies**
 **Key features:**
 
-CRUD functionality implemented using TanStack Query
+- CRUD functionality implemented using TanStack Query
 
-Backend authentication using JWT cookies
+- Backend authentication using JWT cookies
 
-Clean MERN architecture
+- Clean MERN architecture
 
-Standard development environment (no containers yet)
+- Standard development environment (no containers yet)
 
 This branch represents the foundation of the project.
 
@@ -97,11 +97,11 @@ This is the most DevOps heavy branch.
 
 Each major folder contains its own Dockerfile.
 Docker Compose orchestrates all services:
-frontend
-backend
-nginx reverse-proxy
-mongodb
-redis
+- frontend
+- backend
+- nginx reverse-proxy
+- mongodb
+- redis
 
 **What Nginx does in this branch**:
 
@@ -121,8 +121,29 @@ This setup simulates real-world production infrastructure.
 Prerequisite: Docker installed.
 
 - clone the repo.
-- Checkout the branch you want to run : git checkout load-balancing
-- Start all services : docker-compose up
+- To start the master branch which is default:
+**For frontend:**
+```bash
+ cd frontend
+ ```
+ ```bash
+ npm run dev
+ ```
+ **For backend:**
+ ```bash
+ cd backend
+ ```
+ ```bash
+ npm run dev
+ ```
+- Checkout the branch you want to run: 
+```bsh
+git checkout load-balancing
+```
+- Start all services: 
+```bash
+docker-compose up
+```
 - The app will be available on the port specified in docker-compose.yml.
 
 # Purpose of This Project:
