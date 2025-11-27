@@ -12,6 +12,7 @@ import { useLogout } from "../../features/auth/useLogout";
 const MainNavigation = () => {
   const { mutateAsync: logoutUser } = useLogout();
 
+  // not needed no more:
   // const dispatch = useDispatch<AddDispatch>();
   // const logOut = async () => {
   //   const response = await fetch("http://localhost:5000/api/v1/auth/logout",{
