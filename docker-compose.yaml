@@ -12,6 +12,7 @@ services:
       always
   server1:
     build: ./backend
+    image: vawkei/server1:latest
     ports:
       - "5000:5000"
     environment:
@@ -26,6 +27,7 @@ services:
       - redis
   server2:
     build: ./backend
+    image: vawkei/server2:latest
     ports:
       - "5001:5000"
     environment:
@@ -40,6 +42,7 @@ services:
       - redis
   server3:
     build: ./backend
+    image: vawkei/server3:latest
     ports:
       - "5002:5000"
     environment:
@@ -54,6 +57,7 @@ services:
       - redis
   frontend:
     build: ./frontend
+    image: vawkei/frontend:latest
     ports:
       - "3000:3000"
     volumes:
@@ -67,6 +71,7 @@ services:
       - server3
   reverse-proxy:
     build: ./reverse-proxy
+    image: vawkei/reverse-proxy:latest
     ports:
       - "80:80"
     depends_on:
