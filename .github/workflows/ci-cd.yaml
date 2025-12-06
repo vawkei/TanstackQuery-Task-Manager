@@ -16,7 +16,7 @@ jobs:
           key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Build docker images
         run: |
-          docker-compose -f docker-compose.yaml build
+           docker compose -f docker-compose.yaml build
       - name: Push images
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
