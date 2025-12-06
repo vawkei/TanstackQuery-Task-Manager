@@ -20,8 +20,10 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    # env_file:
+    #   - ./backend/.env
     env_file:
-      - ./backend/.env
+      - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
@@ -35,8 +37,10 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    # env_file:
+    #   - ./backend/.env
     env_file:
-      - ./backend/.env
+      - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
@@ -50,8 +54,10 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+    # env_file:
+    #   - ./backend/.env
     env_file:
-      - ./backend/.env
+      - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
