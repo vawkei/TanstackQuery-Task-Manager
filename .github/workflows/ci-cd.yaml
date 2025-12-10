@@ -24,6 +24,7 @@ jobs:
       # Build reverse-proxy separately with correct context
       - name: Build reverse-proxy image
         run: docker build -f reverse-proxy/Dockerfile -t vawkei/reverse-proxy:latest .
+        # run: docker build -f reverse-proxy/Dockerfile -t vawkei/reverse-proxy:latest .
 
       - name: Push images
         env:

@@ -26,11 +26,10 @@
 FROM node:20 AS build
 WORKDIR /app
 
-COPY ./../frontend/package.json ./ 
-COPY ./../frontend/package-lock.json ./ 
+COPY frontend/package.json frontend/package-lock.json* ./
 RUN npm install
 
-COPY ./../frontend ./ 
+COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Serve React + proxy backend with Nginx
