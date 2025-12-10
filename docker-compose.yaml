@@ -61,20 +61,20 @@ services:
     depends_on:
       - mongodb
       - redis
-  frontend:
-    build: ./frontend
-    image: vawkei/frontend:latest
-    ports:
-      - "3000:3000"
-    volumes:
-       - "./frontend/src:/app/src"
+  # frontend:
+  #   build: ./frontend
+  #   image: vawkei/frontend:latest
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #      - "./frontend/src:/app/src"
       
-    stdin_open: true
-    tty: true
-    depends_on:
-      - server1
-      - server2
-      - server3
+  #   stdin_open: true
+  #   tty: true
+  #   depends_on:
+  #     - server1
+  #     - server2
+  #     - server3
   reverse-proxy:
     build: ./reverse-proxy
     image: vawkei/reverse-proxy:latest
