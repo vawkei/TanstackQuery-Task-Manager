@@ -50,8 +50,11 @@ app.use(
 app.use(express.json());
 
 //routes:
-app.get("/", (_req: Request, res: Response) => {
-  res.send("<h1>This is the index.ts checking in </h1>");
+// app.get("/", (_req: Request, res: Response) => {
+//   res.send("<h1>This is the index.ts checking in </h1>");
+// });
+app.get("/api/health", (_req: Request, res: Response) => {
+  res.json({ status: "ok" });
 });
 // auth route:
 app.use("/api/v1/auth", authRoute);
