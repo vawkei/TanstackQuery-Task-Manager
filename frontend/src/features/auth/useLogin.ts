@@ -8,7 +8,7 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: (userData:User) => login(userData),
     onSuccess: (data) => {
-      console.log("logged in successfully", data);
+      console.log("responseFromServer", data);
       // queryClient.invalidateQueries({queryKey:["user"]})
     },
 
@@ -18,3 +18,5 @@ export const useLogin = () => {
     },
   });
 };
+
+
