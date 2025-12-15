@@ -53,6 +53,7 @@ export const createTask: RequestHandler = async (
 
 export const getTasks: RequestHandler = async (req: Request, res: Response) => {
   console.log("this is the getTasks route");
+  console.log(`Worker ${process.pid} fetching tasks for user...`);
 
   const userId = req.user?.userId;
   const userName = req.user?.userName;

@@ -64,6 +64,7 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   console.log("This is the login route");
+  console.log(`Worker ${process.pid} logging in for user...`);
 
   const { email, password } = req.body;
 
@@ -129,6 +130,7 @@ export const login = async (req: Request, res: Response) => {
 
 export const logout = async (req: Request, res: Response) => {
   console.log("the logout route");
+  console.log(`Worker ${process.pid} logging out for user...`);
   try {
     req.session.destroy(() => {
       res.clearCookie("connect.sid");
