@@ -29,3 +29,8 @@ RUN npm install
 
 COPY . .
 RUN npm run build
+
+# Export static files
+FROM alpine:latest
+WORKDIR /app
+COPY --from=build /app/dist /app
