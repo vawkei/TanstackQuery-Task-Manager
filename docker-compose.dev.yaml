@@ -3,16 +3,16 @@ services:
     image: mongo:8.2
     volumes:
       - data:/data/db
+
   redis:
     image: redis:6
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
-    restart:
-      always
+    restart: always
+
   server1:
     build: ./backend
-    image: vawkei/server1:latest
     ports:
       - "5000:5000"
     environment:
@@ -20,16 +20,16 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    # env_file:
-    #   - ./backend/.env
     env_file:
-      - ./backend/env_dummy
+      - ./backend/.env
+    # env_file:
+    #   - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
+
   server2:
     build: ./backend
-    image: vawkei/server2:latest
     ports:
       - "5001:5000"
     environment:
@@ -37,16 +37,16 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    # env_file:
-    #   - ./backend/.env
     env_file:
-      - ./backend/env_dummy
+      - ./backend/.env
+    # env_file:
+    #   - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
+
   server3:
     build: ./backend
-    image: vawkei/server3:latest
     ports:
       - "5002:5000"
     environment:
@@ -54,36 +54,45 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    # env_file:
-    #   - ./backend/.env
     env_file:
-      - ./backend/env_dummy
+      - ./backend/.env
+    # env_file:
+    #   - ./backend/env_dummy
     depends_on:
       - mongodb
       - redis
-  # frontend:
-  #   build: ./frontend
-  #   image: vawkei/frontend:latest
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #      - "./frontend/src:/app/src"
-      
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - server1
-  #     - server2
-  #     - server3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server1
+      - server2
+      - server3
+
   reverse-proxy:
     build: ./reverse-proxy
-    image: vawkei/reverse-proxy:latest
     ports:
       - "80:80"
     depends_on:
       - server1
       - server2
       - server3
+
 volumes:
   data:
   redis_data:
+
+# docker compose -f docker-compose.dev.yaml down
+# docker compose -f docker-compose.dev.yaml up -d
+
+# DO NOT serve the frontend through Nginx in dev
+# with this dev setup, since we are not serving the frontend via nginx, what are we then doing? what is going on in this setup? so i can explain to people when asked. 

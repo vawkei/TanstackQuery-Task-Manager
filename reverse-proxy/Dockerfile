@@ -1,5 +1,5 @@
-# FROM  nginx:stable-alpine
-# COPY  nginx.conf /etc/nginx/nginx.conf
+FROM  nginx:stable-alpine
+COPY  nginx.conf /etc/nginx/nginx.conf
 
 
 # # Stage 1: Build React app
@@ -22,24 +22,24 @@
 
 
 
-# Stage 1: Build React app
-FROM node:20 AS build
-WORKDIR /app
+# # Stage 1: Build React app
+# FROM node:20 AS build
+# WORKDIR /app
 
-COPY frontend/package.json frontend/package-lock.json* ./
-RUN npm install
+# COPY frontend/package.json frontend/package-lock.json* ./
+# RUN npm install
 
-COPY frontend/ ./
-RUN npm run build
+# COPY frontend/ ./
+# RUN npm run build
 
-# Stage 2: Serve React + proxy backend with Nginx
-FROM nginx:stable-alpine
+# # Stage 2: Serve React + proxy backend with Nginx
+# FROM nginx:stable-alpine
 
-# Copy Vite build output (dist) to Nginx html folder
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY reverse-proxy/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# # Copy Vite build output (dist) to Nginx html folder
+# COPY --from=build /app/dist /usr/share/nginx/html
+# COPY reverse-proxy/nginx.conf /etc/nginx/nginx.conf
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
 
 
 

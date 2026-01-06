@@ -1,46 +1,86 @@
+# name: deployment
+# on:
+#   push:
+#     branches:
+#       - ci-cd
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+      
+#       - name: Get code
+#         uses: actions/checkout@v3
+      
+#       - name: Cache dependencies
+#         uses: actions/cache@v4
+#         with:
+#           path: ~/.npm
+#           # key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+#           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      
+#       # Build only backend images using compose
+#       - name: Build backend images
+#         run: docker compose -f docker-compose.yaml build server1 server2 server3
+      
+#       # Build reverse-proxy separately with correct context
+#       - name: Build reverse-proxy image
+#         run: docker build -f reverse-proxy/Dockerfile -t vawkei/reverse-proxy:latest .
+
+#         # This will also work:
+#         #   - name: Build backend images
+#         #   run: docker compose -f docker-compose.yaml build server1 server2 server3 reverse-proxy
+#       - name: Push images
+#         env:
+#           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+#           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+#         run: |
+#           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+#           # Push backend images
+#           docker compose -f docker-compose.yaml push server1
+#           docker compose -f docker-compose.yaml push server2
+#           docker compose -f docker-compose.yaml push server3
+
+#           # Push reverse-proxy
+#           docker push vawkei/reverse-proxy:latest
+
+#      # This will also work:
+#      # - name: Push images
+#      # run: docker compose -f docker-compose.yaml push server1 server2 server3 reverse-proxy
+
+
+
+
+
+
+
+
+
+
 name: deployment
+
 on:
   push:
     branches:
       - ci-cd
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      
-      - name: Get code
-        uses: actions/checkout@v3
-      
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          # key: npm-deps-${{ hashFiles('**/package-lock.json') }}
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      
-      # Build only backend images using compose
-      - name: Build backend images
-        run: docker compose -f docker-compose.yaml build server1 server2 server3
-      
-      # Build reverse-proxy separately with correct context
-      - name: Build reverse-proxy image
-        run: docker build -f reverse-proxy/Dockerfile -t vawkei/reverse-proxy:latest .
-        # run: docker build -f reverse-proxy/Dockerfile -t vawkei/reverse-proxy:latest .
 
-      - name: Push images
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
         run: |
           echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-          # Push backend images
-          docker compose -f docker-compose.yaml push server1
-          docker compose -f docker-compose.yaml push server2
-          docker compose -f docker-compose.yaml push server3
+      - name: Build images
+        run: docker compose -f docker-compose.ci.yaml build
 
-          # Push reverse-proxy
-          docker push vawkei/reverse-proxy:latest
-
-
-
+      - name: Push images
+        run: docker compose -f docker-compose.ci.yaml push
